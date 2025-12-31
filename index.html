@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Pogo Jiiiiiii ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #ffd1dc, #fbc2eb);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        background: white;
+        padding: 45px;
+        max-width: 540px;
+        text-align: center;
+        border-radius: 22px;
+        box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        z-index: 2;
+        position: relative;
+    }
+
+    h1 { color: #ff4f91; margin-bottom: 5px; }
+    h2 { color: #ff85b3; font-weight: normal; margin-top: 0; }
+
+    p { color: #444; font-size: 18px; line-height: 1.7; }
+
+    .heart {
+        font-size: 55px;
+        margin: 20px 0;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.25); }
+        100% { transform: scale(1); }
+    }
+
+    /* Hug animation */
+    .hug {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+        animation: hugAnim 1.2s ease-in-out infinite alternate;
+        pointer-events: none;
+    }
+
+    @keyframes hugAnim {
+        from { transform: scale(1); }
+        to { transform: scale(1.12); }
+    }
+
+    .typing {
+        min-height: 80px;
+        margin-top: 15px;
+        font-size: 18px;
+        color: #555;
+    }
+
+    .signature {
+        margin-top: 30px;
+        font-style: italic;
+        color: #666;
+        font-size: 18px;
+    }
+
+    /* Floating hearts */
+    .floating-heart {
+        position: absolute;
+        font-size: 20px;
+        opacity: 0.6;
+        animation: floatUp 6s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(100vh); }
+        to { transform: translateY(-10vh); }
+    }
+
+    /* Popup */
+    .popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+
+    .popup-content {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        animation: zoomIn 0.5s ease;
+    }
+
+    @keyframes zoomIn {
+        from { transform: scale(0.6); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-content h1 {
+        color: #ff4f91;
+        font-size: 30px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="loveSong" autoplay loop>
+    <source src="dooron.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <h1>Happy New Year 🎉</h1>
+    <h2>My Sweet Pogo Jiiiiiii 💕</h2>
+
+    <div class="heart">❤️</div>
+    <div class="hug" id="hug">🤗</div>
+
+    <p class="typing" id="typingText"></p>
+
+    <p class="signature">
+        Forever yours,<br>
+        your QT ❤️
+    </p>
+</div>
+
+<!-- Final Love Popup -->
+<div class="popup" id="lovePopup">
+    <div class="popup-content">
+        <h1>I LOVE YOU<br>POGO JIIIIIII ❤️🥹</h1>
+        <p>You are my forever and always 💖</p>
+    </div>
+</div>
+
+<script>
+    /* Music fade-in */
+    const song = document.getElementById("loveSong");
+    song.volume = 0;
+    let vol = 0;
+    const fade = setInterval(() => {
+        if (vol < 0.4) {
+            vol += 0.02;
+            song.volume = vol;
+        } else {
+            clearInterval(fade);
+        }
+    }, 200);
+
+    /* Typing effect */
+    const text = "This new year, I wish for endless smiles, warm hugs, and a lifetime of moments with you. You are my peace, my happiness, and my heart.";
+    let i = 0;
+
+    function typeText() {
+        if (i < text.length) {
+            typingText.innerHTML += text.charAt(i++);
+            setTimeout(typeText, 45);
+        } else {
+            autoHug(); // ❤️ AUTO HUG HERE
+        }
+    }
+    typeText();
+
+    /* Auto Hug + Popup */
+    function autoHug() {
+        const hug = document.getElementById("hug");
+        hug.style.display = "flex";
+
+        setTimeout(() => {
+            hug.style.display = "none";
+            document.getElementById("lovePopup").style.display = "flex";
+            confettiBurst();
+        }, 2500);
+    }
+
+    /* Floating hearts */
+    setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "floating-heart";
+        h.innerHTML = "❤️";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = (15 + Math.random() * 20) + "px";
+        h.style.animationDuration = (4 + Math.random() * 4) + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
+    }, 350);
+
+    /* Confetti */
+    function confettiBurst() {
+        for (let i = 0; i < 80; i++) {
+            const c = document.createElement("div");
+            c.style.position = "fixed";
+            c.style.top = "-10px";
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.width = "8px";
+            c.style.height = "14px";
+            c.style.background = ["#ff4f91","#ffd1dc","#fbc2eb","#ff85b3"][Math.floor(Math.random()*4)];
+            c.style.animation = "confettiFall 4s linear forwards";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 5000);
+        }
+    }
+</script>
+
+</body>
+</html>
